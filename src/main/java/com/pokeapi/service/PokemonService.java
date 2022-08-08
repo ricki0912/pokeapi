@@ -12,14 +12,8 @@ import com.pokeapi.model.Respuesta;
 
 
 @Service
-public class PokemonService {
-	 @Value("${api.pokeapi.v2}")
-	 private  String HOST_V2;
-	 
-	@Autowired
-	private RestTemplate template=new RestTemplate();
+public class PokemonService extends BaseService{
 
-	
 	public Respuesta all(int offset, int limit) {
 		return template.getForObject(HOST_V2+"/pokemon-species?offset="+offset+"&limit="+limit, Respuesta.class);
 	}
@@ -30,10 +24,5 @@ public class PokemonService {
 	public DetailPokemon find(int id) {
 		return template.getForObject(HOST_V2+"/pokemon-species/"+id+"/", DetailPokemon.class);
 	}
-	
-	public EvolutionPokemon getEvolutionChain(int id) {
-		return template.getForObject( HOST_V2+"/evolution-chain/"+id+"/", EvolutionPokemon.class);
-	}
-	
 	
 }

@@ -14,31 +14,19 @@ import com.pokeapi.model.DetailPokemon;
 import com.pokeapi.model.EvolutionPokemon;
 import com.pokeapi.model.Pokemon;
 import com.pokeapi.model.Respuesta;
+import com.pokeapi.service.EvolutionChainService;
 import com.pokeapi.service.PokemonService;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/pokemones")
-public class PokemonController {
+@RequestMapping("/evolution-chain")
+public class EvolutionChainController {
 	@Autowired
-	private PokemonService pokemonService;
-	
-	@GetMapping("/all-original")
-	public Object allOriginal(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit){
-		//return offset+" - "+limit;
-		return this.pokemonService.allOriginal(offset, limit);
-	}
-	
-	@GetMapping("")
-	public Respuesta all(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit){
-		return this.pokemonService.all(offset, limit);
-	}
+	private EvolutionChainService evolutionChainService;
 	
 	@GetMapping("/{id}")
-	public DetailPokemon  find(@PathVariable Integer id) {
-		return this.pokemonService.find(id);
+	public EvolutionPokemon find(@PathVariable Integer id) {
+		return this.evolutionChainService.find(id);
 	}
-	
 	
 }
